@@ -39,7 +39,7 @@ describe("Product Flow", () => {
       ProductsPage.searchProduct(productName);
       ProductsPage.verifyProductVisible(productName);
       ProductsPage.addFirstVisibleProductToList();
-      ProductsPage.verifyProductAdded(productName);
+      ProductsPage.verifyProductAddedToShoppingList(productName);
     });
   });
 });
