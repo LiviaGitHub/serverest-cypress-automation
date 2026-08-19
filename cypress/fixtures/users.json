@@ -1,0 +1,12 @@
+{
+  "standardUser": {
+    "name": "QA Automation User",
+    "password": "Test123!",
+    "administrator": "false"
+  },
+  "adminUser": {
+    "name": "QA Automation Admin",
+    "password": "Test123!",
+    "administrator": "true"
+  }
+}

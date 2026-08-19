@@ -1,0 +1,8 @@
+{
+  "defaultProduct": {
+    "name": "Automation Test Product",
+    "price": 100,
+    "description": "Product created by Cypress automated tests",
+    "quantity": 10
+  }
+}
