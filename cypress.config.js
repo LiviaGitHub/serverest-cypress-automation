@@ -1,6 +1,7 @@
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
+  projectId: 'ur49yv',
   reporter: 'cypress-mochawesome-reporter',
   e2e: {
     baseUrl: 'https://front.serverest.dev',
