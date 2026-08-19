@@ -3,9 +3,26 @@ import UserService from "../../services/UserService";
 import { generateUniqueProductName } from "../../support/testData";
 
 describe("Products API", () => {
+  let productId;
+  let userId;
+  let token;
+
+  afterEach(() => {
+    if (productId && token) {
+      ProductService.deleteProduct(productId, token);
+    }
+
+    if (userId) {
+      UserService.deleteUser(userId);
+    }
+  });
+
   it("should create and retrieve a product as an authenticated administrator", () => {
     cy.fixture("products").then((products) => {
-      cy.createAndLoginUser("true").then(({ token, userId }) => {
+      cy.createAndLoginUser("true").then((session) => {
+        token = session.token;
+        userId = session.userId;
+
         const product = {
           nome: generateUniqueProductName(),
           preco: products.defaultProduct.price,
@@ -19,9 +36,10 @@ describe("Products API", () => {
             "message",
             "Cadastro realizado com sucesso",
           );
+
           expect(createResponse.body).to.have.property("_id").and.not.be.empty;
 
-          const productId = createResponse.body._id;
+          productId = createResponse.body._id;
 
           ProductService.getProductById(productId).then((getResponse) => {
             expect(getResponse.status).to.eq(200);
@@ -30,9 +48,6 @@ describe("Products API", () => {
             expect(getResponse.body.descricao).to.eq(product.descricao);
             expect(getResponse.body.quantidade).to.eq(product.quantidade);
           });
-
-          ProductService.deleteProduct(productId, token);
-          UserService.deleteUser(userId);
         });
       });
     });
