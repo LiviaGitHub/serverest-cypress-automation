@@ -32,6 +32,14 @@ Frontend and API automated test suite for ServeRest, developed with Cypress and 
 2. Reject product creation by a non-admin user
 3. Create and retrieve a product as an authenticated administrator
 
+### Test Scenario Selection
+
+The scenarios were selected to provide balanced coverage across different types of risk and application behavior, rather than focusing only on happy paths.
+
+The test suite combines positive and negative scenarios, business-rule validation, authentication and authorization checks, data persistence validation, and an end-to-end product flow.
+
+Given the limited scope of three frontend and three API scenarios, the goal was to cover different critical behaviors while demonstrating both functional validation and risk-based testing.
+
 ## Architecture
 
 Page Objects encapsulate UI selectors and interactions so the test specifications remain focused on business behavior.
