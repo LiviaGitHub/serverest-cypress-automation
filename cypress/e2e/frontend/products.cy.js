@@ -1,18 +1,18 @@
-import LoginPage from '../../pages/LoginPage';
-import ProductsPage from '../../pages/ProductsPage';
-import UserService from '../../services/UserService';
-import { generateUniqueEmail } from '../../support/testData';
+import LoginPage from "../../pages/LoginPage";
+import ProductsPage from "../../pages/ProductsPage";
+import UserService from "../../services/UserService";
+import { generateUniqueEmail } from "../../support/testData";
 
-describe('Product Flow', () => {
+describe("Product Flow", () => {
   let user;
   let userId;
 
   beforeEach(() => {
     user = {
-      nome: 'QA Product User',
+      nome: "QA Product User",
       email: generateUniqueEmail(),
-      password: 'Test123!',
-      administrador: 'false'
+      password: "Test123!",
+      administrador: "false",
     };
 
     UserService.createUser(user).then((response) => {
@@ -25,17 +25,22 @@ describe('Product Flow', () => {
     if (userId) UserService.deleteUser(userId);
   });
 
-  it('should search for a product and add it to the shopping list', () => {
+  it("should search for a product and add it to the shopping list", () => {
     LoginPage.visit();
     LoginPage.login(user.email, user.password);
-    cy.url().should('not.include', '/login');
+    cy.url().should("not.include", "/login");
 
-    cy.get('.card').first().invoke('text').then((text) => {
-      const productName = text.trim().split('\n')[0].trim();
-      ProductsPage.searchProduct(productName);
-      ProductsPage.verifyProductVisible(productName);
-      ProductsPage.addFirstVisibleProductToList();
-      ProductsPage.verifyProductAdded(productName);
-    });
+    cy.get(".card")
+      .first()
+      .find(".card-title")
+      .invoke("text")
+      .then((productName) => {
+        const name = productName.trim();
+
+        ProductsPage.searchProduct(name);
+        ProductsPage.verifyProductVisible(name);
+        ProductsPage.addFirstVisibleProductToList();
+        ProductsPage.verifyProductAdded(name);
+      });
   });
 });
