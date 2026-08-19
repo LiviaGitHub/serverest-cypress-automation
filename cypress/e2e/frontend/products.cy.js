@@ -35,17 +35,11 @@ describe("Product Flow", () => {
 
     cy.url().should("not.include", "/login");
 
-    cy.get(".card")
-      .first()
-      .find(".card-title")
-      .invoke("text")
-      .then((productName) => {
-        const name = productName.trim();
-
-        ProductsPage.searchProduct(name);
-        ProductsPage.verifyProductVisible(name);
-        ProductsPage.addFirstVisibleProductToList();
-        ProductsPage.verifyProductAdded(name);
-      });
+    ProductsPage.getFirstProductName().then((productName) => {
+      ProductsPage.searchProduct(productName);
+      ProductsPage.verifyProductVisible(productName);
+      ProductsPage.addFirstVisibleProductToList();
+      ProductsPage.verifyProductAdded(productName);
+    });
   });
 });

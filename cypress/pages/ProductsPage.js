@@ -1,11 +1,21 @@
 class ProductsPage {
+  getFirstProductName() {
+    return cy
+      .get(".card")
+      .first()
+      .find(".card-title")
+      .invoke("text")
+      .then((productName) => productName.trim());
+  }
+
   searchProduct(productName) {
     cy.get('[data-testid="pesquisar"]').clear().type(productName);
+
     cy.get('[data-testid="botaoPesquisar"]').click();
   }
 
   verifyProductVisible(productName) {
-    cy.contains(productName).should('be.visible');
+    cy.contains(productName).should("be.visible");
   }
 
   addFirstVisibleProductToList() {
@@ -13,7 +23,8 @@ class ProductsPage {
   }
 
   verifyProductAdded(productName) {
-    cy.contains(productName).should('be.visible');
+    cy.contains(productName).should("be.visible");
   }
 }
+
 export default new ProductsPage();
