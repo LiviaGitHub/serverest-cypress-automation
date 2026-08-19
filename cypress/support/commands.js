@@ -1,17 +1,17 @@
-import UserService from "../services/UserService";
-import AuthService from "../services/AuthService";
-import { generateUniqueEmail } from "./testData";
+import UserService from '../services/UserService';
+import AuthService from '../services/AuthService';
+import { generateUniqueEmail } from './testData';
 
-Cypress.Commands.add("createAndLoginUser", (administrator = "false") => {
-  cy.fixture("users").then((users) => {
+Cypress.Commands.add('createAndLoginUser', (administrator = 'false') => {
+  return cy.fixture('users').then((users) => {
     const userData =
-      administrator === "true" ? users.adminUser : users.standardUser;
+      administrator === 'true' ? users.adminUser : users.standardUser;
 
     const user = {
       nome: userData.name,
       email: generateUniqueEmail(),
       password: userData.password,
-      administrador: administrator,
+      administrador: administrator
     };
 
     return UserService.createUser(user).then((userResponse) => {
@@ -24,9 +24,9 @@ Cypress.Commands.add("createAndLoginUser", (administrator = "false") => {
           return {
             user,
             userId: userResponse.body._id,
-            token: loginResponse.body.authorization,
+            token: loginResponse.body.authorization
           };
-        },
+        }
       );
     });
   });

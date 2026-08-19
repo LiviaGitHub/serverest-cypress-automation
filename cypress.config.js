@@ -1,17 +1,28 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress');
+const { allureCypress } = require('allure-cypress/reporter');
 
 module.exports = defineConfig({
-  reporter: "cypress-mochawesome-reporter",
   e2e: {
-    baseUrl: "https://front.serverest.dev",
-    env: { apiUrl: "https://serverest.dev" },
+    baseUrl: 'https://front.serverest.dev',
+
+    env: {
+      apiUrl: 'https://serverest.dev'
+    },
+
     setupNodeEvents(on, config) {
-      require("cypress-mochawesome-reporter/plugin")(on);
+      allureCypress(on, config);
+
       return config;
     },
+
     viewportWidth: 1440,
     viewportHeight: 900,
+
     video: true,
-    retries: { runMode: 2, openMode: 0 },
-  },
+
+    retries: {
+      runMode: 2,
+      openMode: 0
+    }
+  }
 });

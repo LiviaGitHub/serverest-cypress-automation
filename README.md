@@ -88,7 +88,14 @@ GitHub Actions executes the Cypress suite on pushes and pull requests to `main`.
 
 ## Reporting
 
-The project uses `cypress-mochawesome-reporter`. Reports are generated during test execution and stored under the Cypress reports directory.
+The project uses Allure Report for automated test reporting.
+
+Test results are generated during Cypress execution and stored in the `allure-results` directory.
+
+To generate the HTML report:
+
+```bash
+npm run allure:generate
 
 ## Test Design
 
@@ -107,3 +114,4 @@ The suite intentionally includes:
 ServeRest is a shared public test environment. Dynamic data is used to reduce collisions with other users.
 
 UI selectors should always be verified against the current ServeRest frontend before final delivery, since the public application can evolve over time.
+```

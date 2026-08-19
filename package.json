@@ -7,10 +7,17 @@
     "cy:run": "cypress run",
     "test": "cypress run",
     "test:frontend": "cypress run --spec \"cypress/e2e/frontend/**/*.cy.js\"",
-    "test:api": "cypress run --spec \"cypress/e2e/api/**/*.cy.js\""
+    "test:api": "cypress run --spec \"cypress/e2e/api/**/*.cy.js\"",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "test:allure": "cypress run && allure generate allure-results --clean -o allure-report",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "allure-commandline": "^2.43.0",
+    "allure-cypress": "^3.10.2",
     "cypress": "^15.0.0",
-    "cypress-mochawesome-reporter": "^3.8.2"
+    "prettier": "^3.9.6"
   }
 }

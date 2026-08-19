@@ -1,6 +1,14 @@
 node_modules/
+
 cypress/videos/
+
 cypress/screenshots/
+
 cypress/reports/
+
+allure-results/
+allure-report/
+
 .DS_Store
+
 .env
