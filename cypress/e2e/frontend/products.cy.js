@@ -8,26 +8,31 @@ describe("Product Flow", () => {
   let userId;
 
   beforeEach(() => {
-    user = {
-      nome: "QA Product User",
-      email: generateUniqueEmail(),
-      password: "Test123!",
-      administrador: "false",
-    };
+    cy.fixture("users").then((users) => {
+      user = {
+        nome: users.standardUser.name,
+        email: generateUniqueEmail(),
+        password: users.standardUser.password,
+        administrador: users.standardUser.administrator,
+      };
 
-    UserService.createUser(user).then((response) => {
-      expect(response.status).to.eq(201);
-      userId = response.body._id;
+      UserService.createUser(user).then((response) => {
+        expect(response.status).to.eq(201);
+        userId = response.body._id;
+      });
     });
   });
 
   afterEach(() => {
-    if (userId) UserService.deleteUser(userId);
+    if (userId) {
+      UserService.deleteUser(userId);
+    }
   });
 
   it("should search for a product and add it to the shopping list", () => {
     LoginPage.visit();
     LoginPage.login(user.email, user.password);
+
     cy.url().should("not.include", "/login");
 
     cy.get(".card")

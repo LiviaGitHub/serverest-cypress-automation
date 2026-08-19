@@ -8,5 +8,8 @@
     "name": "QA Automation Admin",
     "password": "Test123!",
     "administrator": "true"
+  },
+  "invalidUser": {
+    "password": "WrongPassword123"
   }
 }
