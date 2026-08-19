@@ -1,6 +1,6 @@
 class LoginPage {
   visit() {
-    cy.visit("/login");
+    cy.visit('/login');
   }
 
   fillEmail(email) {
@@ -22,7 +22,7 @@ class LoginPage {
   }
 
   verifyErrorMessage(message) {
-    cy.contains(message).should("be.visible");
+    cy.contains(message).should('be.visible');
   }
 }
 

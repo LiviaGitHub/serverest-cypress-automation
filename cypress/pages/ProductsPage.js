@@ -1,10 +1,10 @@
 class ProductsPage {
   getFirstProductName() {
     return cy
-      .get(".card")
+      .get('.card')
       .first()
-      .find(".card-title")
-      .invoke("text")
+      .find('.card-title')
+      .invoke('text')
       .then((productName) => productName.trim());
   }
 
@@ -14,7 +14,7 @@ class ProductsPage {
   }
 
   verifyProductVisible(productName) {
-    cy.contains(productName).should("be.visible");
+    cy.contains(productName).should('be.visible');
   }
 
   addFirstVisibleProductToList() {
@@ -22,7 +22,7 @@ class ProductsPage {
   }
 
   verifyProductAddedToShoppingList(productName) {
-    cy.contains(productName).should("be.visible");
+    cy.contains(productName).should('be.visible');
   }
 }
 

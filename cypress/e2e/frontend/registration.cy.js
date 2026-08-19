@@ -1,8 +1,8 @@
-import RegistrationPage from "../../pages/RegistrationPage";
-import UserService from "../../services/UserService";
-import { generateUniqueEmail } from "../../support/testData";
+import RegistrationPage from '../../pages/RegistrationPage';
+import UserService from '../../services/UserService';
+import { generateUniqueEmail } from '../../support/testData';
 
-describe("User Registration", () => {
+describe('User Registration', () => {
   let userId;
 
   afterEach(() => {
@@ -11,13 +11,13 @@ describe("User Registration", () => {
     }
   });
 
-  it("should reject registration with an already registered email", () => {
-    cy.fixture("users").then((users) => {
+  it('should reject registration with an already registered email', () => {
+    cy.fixture('users').then((users) => {
       const existingUser = {
         nome: users.standardUser.name,
         email: generateUniqueEmail(),
         password: users.standardUser.password,
-        administrador: users.standardUser.administrator,
+        administrador: users.standardUser.administrator
       };
 
       // Arrange: create an existing user through the API
@@ -29,9 +29,9 @@ describe("User Registration", () => {
         RegistrationPage.visit();
 
         RegistrationPage.registerUser({
-          name: "Duplicate User",
+          name: 'Duplicate User',
           email: existingUser.email,
-          password: existingUser.password,
+          password: existingUser.password
         });
 
         // Assert

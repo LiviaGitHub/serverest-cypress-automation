@@ -1,6 +1,6 @@
 class RegistrationPage {
   visit() {
-    cy.visit("/cadastrarusuarios");
+    cy.visit('/cadastrarusuarios');
   }
 
   fillName(name) {
@@ -27,7 +27,7 @@ class RegistrationPage {
   }
 
   verifyDuplicateEmailError() {
-    cy.contains("Este email já está sendo usado").should("be.visible");
+    cy.contains('Este email já está sendo usado').should('be.visible');
   }
 }
 

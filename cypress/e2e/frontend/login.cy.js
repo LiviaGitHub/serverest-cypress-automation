@@ -1,16 +1,16 @@
-import LoginPage from "../../pages/LoginPage";
-import { generateUniqueEmail } from "../../support/testData";
+import LoginPage from '../../pages/LoginPage';
+import { generateUniqueEmail } from '../../support/testData';
 
-describe("Login", () => {
-  it("should display an error when logging in with invalid credentials", () => {
-    cy.fixture("users").then((users) => {
+describe('Login', () => {
+  it('should display an error when logging in with invalid credentials', () => {
+    cy.fixture('users').then((users) => {
       const email = generateUniqueEmail();
 
       LoginPage.visit();
       LoginPage.login(email, users.invalidUser.password);
 
-      LoginPage.verifyErrorMessage("Email e/ou senha inválidos");
-      cy.url().should("include", "/login");
+      LoginPage.verifyErrorMessage('Email e/ou senha inválidos');
+      cy.url().should('include', '/login');
     });
   });
 });

@@ -1,19 +1,19 @@
-import LoginPage from "../../pages/LoginPage";
-import ProductsPage from "../../pages/ProductsPage";
-import UserService from "../../services/UserService";
-import { generateUniqueEmail } from "../../support/testData";
+import LoginPage from '../../pages/LoginPage';
+import ProductsPage from '../../pages/ProductsPage';
+import UserService from '../../services/UserService';
+import { generateUniqueEmail } from '../../support/testData';
 
-describe("Product Flow", () => {
+describe('Product Flow', () => {
   let user;
   let userId;
 
   beforeEach(() => {
-    cy.fixture("users").then((users) => {
+    cy.fixture('users').then((users) => {
       user = {
         nome: users.standardUser.name,
         email: generateUniqueEmail(),
         password: users.standardUser.password,
-        administrador: users.standardUser.administrator,
+        administrador: users.standardUser.administrator
       };
 
       UserService.createUser(user).then((response) => {
@@ -29,11 +29,11 @@ describe("Product Flow", () => {
     }
   });
 
-  it("should search for a product and add it to the shopping list", () => {
+  it('should search for a product and add it to the shopping list', () => {
     LoginPage.visit();
     LoginPage.login(user.email, user.password);
 
-    cy.url().should("not.include", "/login");
+    cy.url().should('not.include', '/login');
 
     ProductsPage.getFirstProductName().then((productName) => {
       ProductsPage.searchProduct(productName);
