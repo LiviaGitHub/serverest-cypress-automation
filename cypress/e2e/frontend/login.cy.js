@@ -2,7 +2,7 @@ import LoginPage from "../../pages/LoginPage";
 import { generateUniqueEmail } from "../../support/testData";
 
 describe("Login", () => {
-  it("should display an error for invalid credentials", () => {
+  it("should display an error when logging in with invalid credentials", () => {
     cy.fixture("users").then((users) => {
       const email = generateUniqueEmail();
 

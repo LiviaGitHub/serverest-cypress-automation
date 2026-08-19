@@ -2,7 +2,7 @@ import UserService from "../../services/UserService";
 import { generateUniqueEmail } from "../../support/testData";
 
 describe("Users API", () => {
-  it("should create a new user successfully", () => {
+  it("should create a user and validate persisted data", () => {
     cy.fixture("users").then((users) => {
       const user = {
         nome: users.standardUser.name,

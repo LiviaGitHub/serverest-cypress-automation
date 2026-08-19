@@ -11,7 +11,7 @@ describe("User Registration", () => {
     }
   });
 
-  it("should prevent registration with an already registered email", () => {
+  it("should reject registration with an already registered email", () => {
     cy.fixture("users").then((users) => {
       const existingUser = {
         nome: users.standardUser.name,

@@ -9,7 +9,7 @@ import {
 describe("Authorization API", () => {
   let userId;
 
-  it("should prevent a non-admin user from creating a product", () => {
+  it("should reject product creation by a non-admin user", () => {
     cy.fixture("users").then((users) => {
       const standardUser = {
         nome: users.standardUser.name,

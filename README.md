@@ -22,15 +22,15 @@ Frontend and API automated test suite for ServeRest, developed with Cypress and 
 
 ### Frontend E2E
 
-1. Prevent registration with an already registered email
-2. Login with invalid credentials
+1. Reject registration with an already registered email
+2. Display an error when logging in with invalid credentials
 3. Search for a product and add it to the shopping list
 
 ### API
 
-1. Successful user creation and persistence validation
-2. Prevent a non-admin user from creating a product
-3. Authenticated product creation and retrieval
+1. Create a user and validate persisted data
+2. Reject product creation by a non-admin user
+3. Create and retrieve a product as an authenticated administrator
 
 ## Architecture
 

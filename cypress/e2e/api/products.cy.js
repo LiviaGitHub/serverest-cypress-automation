@@ -3,7 +3,7 @@ import UserService from "../../services/UserService";
 import { generateUniqueProductName } from "../../support/testData";
 
 describe("Products API", () => {
-  it("should create a product using an authenticated administrator", () => {
+  it("should create and retrieve a product as an authenticated administrator", () => {
     cy.fixture("products").then((products) => {
       cy.createAndLoginUser("true").then(({ token, userId }) => {
         const product = {
