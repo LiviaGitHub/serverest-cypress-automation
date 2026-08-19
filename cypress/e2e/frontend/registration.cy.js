@@ -1,20 +1,42 @@
 import RegistrationPage from "../../pages/RegistrationPage";
+import UserService from "../../services/UserService";
 import { generateUniqueEmail } from "../../support/testData";
 
 describe("User Registration", () => {
-  it("should register a new user successfully", () => {
+  let userId;
+
+  afterEach(() => {
+    if (userId) {
+      UserService.deleteUser(userId);
+    }
+  });
+
+  it("should prevent registration with an already registered email", () => {
     cy.fixture("users").then((users) => {
-      const user = {
-        name: users.standardUser.name,
+      const existingUser = {
+        nome: users.standardUser.name,
         email: generateUniqueEmail(),
         password: users.standardUser.password,
+        administrador: users.standardUser.administrator,
       };
 
-      RegistrationPage.visit();
-      RegistrationPage.registerUser(user);
+      // Arrange: create an existing user through the API
+      UserService.createUser(existingUser).then((response) => {
+        expect(response.status).to.eq(201);
+        userId = response.body._id;
 
-      RegistrationPage.verifyRegistrationSuccess();
-      cy.url().should("not.include", "/cadastrarusuarios");
+        // Act: try to register with the same email through the UI
+        RegistrationPage.visit();
+
+        RegistrationPage.registerUser({
+          name: "Duplicate User",
+          email: existingUser.email,
+          password: existingUser.password,
+        });
+
+        // Assert
+        RegistrationPage.verifyDuplicateEmailError();
+      });
     });
   });
 });
