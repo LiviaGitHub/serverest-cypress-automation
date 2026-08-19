@@ -1,0 +1,16 @@
+{
+  "name": "serverest-cypress-automation",
+  "version": "1.0.0",
+  "description": "Frontend and API automated tests for ServeRest using Cypress and JavaScript",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test": "cypress run",
+    "test:frontend": "cypress run --spec \"cypress/e2e/frontend/**/*.cy.js\"",
+    "test:api": "cypress run --spec \"cypress/e2e/api/**/*.cy.js\""
+  },
+  "devDependencies": {
+    "cypress": "^15.0.0",
+    "cypress-mochawesome-reporter": "^3.8.2"
+  }
+}
