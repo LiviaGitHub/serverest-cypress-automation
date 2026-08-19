@@ -16,7 +16,8 @@ Frontend and API automated test suite for ServeRest, developed with Cypress and 
 - Custom Cypress Commands
 - Fixtures
 - GitHub Actions
-- Mochawesome
+- Allure Report
+- Prettier
 
 ## Test Coverage
 
@@ -96,10 +97,18 @@ To generate the HTML report:
 
 ```bash
 npm run allure:generate
+```
+
+To open the report:
+
+```bash
+npm run allure:open
+```
 
 ## Test Design
 
 The suite intentionally includes:
+
 - Happy-path coverage
 - Negative validation
 - UI business flows
@@ -114,4 +123,3 @@ The suite intentionally includes:
 ServeRest is a shared public test environment. Dynamic data is used to reduce collisions with other users.
 
 UI selectors should always be verified against the current ServeRest frontend before final delivery, since the public application can evolve over time.
-```
