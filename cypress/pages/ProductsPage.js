@@ -10,7 +10,6 @@ class ProductsPage {
 
   searchProduct(productName) {
     cy.get('[data-testid="pesquisar"]').clear().type(productName);
-
     cy.get('[data-testid="botaoPesquisar"]').click();
   }
 
@@ -22,7 +21,7 @@ class ProductsPage {
     cy.get('[data-testid="adicionarNaLista"]').first().click();
   }
 
-  verifyProductAdded(productName) {
+  verifyProductAddedToShoppingList(productName) {
     cy.contains(productName).should("be.visible");
   }
 }
