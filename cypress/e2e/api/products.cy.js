@@ -1,31 +1,39 @@
-import ProductService from '../../services/ProductService';
-import UserService from '../../services/UserService';
-import { generateUniqueProductName } from '../../support/testData';
+import ProductService from "../../services/ProductService";
+import UserService from "../../services/UserService";
+import { generateUniqueProductName } from "../../support/testData";
 
-describe('Products API', () => {
-  it('should create a product using an authenticated administrator', () => {
-    cy.createAndLoginUser('true').then(({ token, userId }) => {
-      const product = {
-        nome: generateUniqueProductName(),
-        preco: 100,
-        descricao: 'Created by Cypress API automation',
-        quantidade: 10
-      };
+describe("Products API", () => {
+  it("should create a product using an authenticated administrator", () => {
+    cy.fixture("products").then((products) => {
+      cy.createAndLoginUser("true").then(({ token, userId }) => {
+        const product = {
+          nome: generateUniqueProductName(),
+          preco: products.defaultProduct.price,
+          descricao: products.defaultProduct.description,
+          quantidade: products.defaultProduct.quantity,
+        };
 
-      ProductService.createProduct(product, token).then((response) => {
-        expect(response.status).to.eq(201);
-        expect(response.body).to.have.property('message', 'Cadastro realizado com sucesso');
-        expect(response.body).to.have.property('_id').and.not.be.empty;
+        ProductService.createProduct(product, token).then((createResponse) => {
+          expect(createResponse.status).to.eq(201);
+          expect(createResponse.body).to.have.property(
+            "message",
+            "Cadastro realizado com sucesso",
+          );
+          expect(createResponse.body).to.have.property("_id").and.not.be.empty;
 
-        const productId = response.body._id;
+          const productId = createResponse.body._id;
 
-        ProductService.getProductById(productId).then((getResponse) => {
-          expect(getResponse.status).to.eq(200);
-          expect(getResponse.body.nome).to.eq(product.nome);
-          expect(getResponse.body.preco).to.eq(product.preco);
-          expect(getResponse.body.quantidade).to.eq(product.quantidade);
-        }).then(() => ProductService.deleteProduct(productId, token))
-          .then(() => UserService.deleteUser(userId));
+          ProductService.getProductById(productId).then((getResponse) => {
+            expect(getResponse.status).to.eq(200);
+            expect(getResponse.body.nome).to.eq(product.nome);
+            expect(getResponse.body.preco).to.eq(product.preco);
+            expect(getResponse.body.descricao).to.eq(product.descricao);
+            expect(getResponse.body.quantidade).to.eq(product.quantidade);
+          });
+
+          ProductService.deleteProduct(productId, token);
+          UserService.deleteUser(userId);
+        });
       });
     });
   });
